@@ -1,0 +1,11 @@
+.unicodes:before {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.unicodes-foo:before {
+  content: 'bar';
+}
+
+.unicodes-baz:before {
+  content: 'qux';
+}

@@ -1,0 +1,36 @@
+{
+  "name": "unicodes",
+  "version": "0.0.0",
+  "description": "Semantic human readable unicode icon font",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive test/specs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomaswelton/unicodes.git"
+  },
+  "keywords": [
+    "unicode",
+    "icon",
+    "font"
+  ],
+  "author": "Thomas Welton <thomaswelton@me.com> (http://thomaswelton.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thomaswelton/unicodes/issues"
+  },
+  "homepage": "https://github.com/thomaswelton/unicodes",
+  "dependencies": {
+    "chai-as-promised": "^4.1.1",
+    "q-io": "^1.11.2",
+    "unicode": "^0.6.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.20.1",
+    "mustache": "^0.8.2",
+    "unicode": "^0.6.0",
+    "useful-string": "0.0.1"
+  }
+}
