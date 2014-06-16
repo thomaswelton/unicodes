@@ -1,3 +1,5 @@
+/*globals describe, it */
+
 "use strict";
 
 var unicodes   = require("../../../index");
@@ -18,6 +20,7 @@ describe("Unicode.json generation", function () {
 
     it("should return valid JSON", function (done) {
         unicodes.getJSON(function (err, actual) {
+            assert.typeOf(err, 'null');
             assert.typeOf(actual, 'array');
             done();
         });

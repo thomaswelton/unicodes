@@ -1,3 +1,5 @@
+/*globals describe, it */
+
 "use strict";
 
 var unicodes   = require("../../../index");
@@ -22,7 +24,8 @@ var testData = [
 describe("CSS generation", function () {
 
     it('should produce expected results', function (done) {
-        unicodes.generateCSS(testData, function (err, css){
+        unicodes.generateCSS(testData, function (err, css) {
+            assert.typeOf(err, 'null');
             assert.deepEqual(css, expectedCss);
 
             done();
