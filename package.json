@@ -28,8 +28,15 @@
   },
   "devDependencies": {
     "chai": "^1.9.1",
+    "grunt": "^0.4.5",
+    "grunt-bless": "^0.1.1",
+    "grunt-contrib-csslint": "^0.2.0",
+    "grunt-contrib-less": "^0.11.2",
+    "grunt-contrib-sass": "^0.7.3",
+    "load-grunt-tasks": "^0.5.0",
     "mocha": "^1.20.1",
     "mustache": "^0.8.2",
+    "q": "^1.0.1",
     "unicode": "^0.6.0",
     "useful-string": "0.0.1"
   }

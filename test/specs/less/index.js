@@ -9,7 +9,7 @@ var fs           = require("fs");
 
 var cwd          = process.cwd();
 
-var expectedCss     = fs.readFileSync(cwd + "/test/fixtures/expected/unicodes.css", "utf-8");
+var expected     = fs.readFileSync(cwd + "/test/fixtures/expected/unicodes.less", "utf-8");
 var testData = [
     {
         name: 'foo',
@@ -21,12 +21,12 @@ var testData = [
     }
 ];
 
-describe("CSS generation", function () {
+describe("Less generation", function () {
 
-    it('should produce expected results', function (done) {
-        unicodes.generateStylesheet('css', testData, function (err, css) {
+    it('should produce expected less results', function (done) {
+        unicodes.generateStylesheet('less', testData, function (err, css) {
             assert.typeOf(err, 'null');
-            assert.deepEqual(css, expectedCss);
+            assert.deepEqual(css, expected);
 
             done();
         });

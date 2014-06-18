@@ -5,33 +5,24 @@ var FS = require('q-io/fs');
 var path = require('path');
 var string = require('useful-string');
 var Mustache = require('mustache');
+var Q = require('q');
 
 var jsonFile = 'unicodes.json';
 
 exports.compile = function (cb) {
-    var self = this;
-    self.createJSON(function (err, json) {
-        if (err) {
-            cb(err);
-        }
+    var json = this.getJSON(),
+        css,
+        less,
+        scss;
 
-        self.generateCSS(json, function (err, css) {
-            if (err) {
-                cb(err);
-            }
+    css = this.generateStylesheet('css', json);
+    less = this.generateStylesheet('scss', json);
+    scss = this.generateStylesheet('less', json);
 
-            fs.writeFile(path.join('dist', 'unicodes.css'), css, function (err) {
-                if (err) {
-                    cb(err);
-                }
-
-                cb(null);
-            });
-        });
-    });
+    Q.all([css, less, scss]).then(cb);
 };
 
-exports.createJSON = function (cb) {
+exports.getJSON = function () {
     var so = require('unicode/category/So'),
         codes = [],
         item,
@@ -50,33 +41,16 @@ exports.createJSON = function (cb) {
         }
     }
 
-    FS.write(jsonFile, JSON.stringify(codes, undefined, 2))
-        .then(function () {
-            cb(null, codes);
+    return codes;
+};
+
+exports.generateStylesheet = function (type, json) {
+    return FS.read(path.join('templates', 'unicodes.' + type + '.tpl'), {encoding: 'utf8'})
+        .then(function (template) {
+            return Mustache.render(template, { data: json });
         }).
-        fail(function (err) {
-            cb(err);
-        });
-};
-
-exports.getJSON = function (cb) {
-    FS.read(jsonFile, {encoding: 'utf8'})
-        .then(function (contents) {
-            cb(null, JSON.parse(contents));
-        })
-        .fail(function (err) {
-            cb(err);
-        });
-};
-
-exports.generateCSS = function (json, cb) {
-    FS.read(path.join('templates', 'unicodes.css'), {encoding: 'utf8'})
-        .then(function (cssTemplate) {
-            var output = Mustache.render(cssTemplate, { data: json });
-            cb(null, output);
-        })
-        .fail(function (err) {
-            cb(err);
+        then(function (stylesheet) {
+            return FS.write(path.join('dist', 'unicodes.' + type), stylesheet);
         });
 };
 

@@ -1,0 +1,36 @@
+//--------------------------------------------------------------
+// Unicode Variables
+//--------------------------------------------------------------
+
+@unicodes-foo: 'bar';
+@unicodes-baz: 'qux';
+
+//--------------------------------------------------------------
+// Unicode Mixins
+//--------------------------------------------------------------
+
+.unicodes() {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.unicodes-foo() {
+  &:extend(.unicodes);
+  content: @unicodes-foo;
+}
+
+.unicodes-bar() {
+  &:extend(.unicodes);
+  content: @unicodes-bar;
+}
+
+//--------------------------------------------------------------
+// Unicode Classes
+//--------------------------------------------------------------
+
+.unicodes-foo:before {
+  .unicodes-foo();
+}
+
+.unicodes-baz:before {
+  .unicodes-bar();
+}
